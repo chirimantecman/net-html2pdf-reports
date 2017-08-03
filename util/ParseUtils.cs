@@ -9,8 +9,8 @@ namespace html2pdf_report_generator.util
     class ParseUtils
     {
         /*
-         * Removes all line endings from a string, optionally replaces
-         * them with whitespace.
+         * removeLineEndings - Removes all line endings from a string,
+         * optionally replaces them with whitespace.
          */
         public static string removeLineEndings(string line, Boolean whitespace=false)
         {
@@ -24,6 +24,22 @@ namespace html2pdf_report_generator.util
                 ).Replace("\r", replacement
                 ).Replace(LINE_SEPARATOR, replacement
                 ).Replace(PARAGRAPH_SEPARATOR, replacement);
+        }
+
+
+        /*
+         * checkMandatoryKey - checks wether a dictionary has a
+         * mandatory key. If it does, it returns the value, if not, it
+         * throws a FormatException with an error message.
+         */
+        public static string checkMandatoryKey(
+            Dictionary<string, string> dict, string key)
+        {
+            if (!dict.ContainsKey(key))
+                throw new FormatException("The dictionary is missing "
+                    + "the mandatory '" + key + "' attribute.");
+            else
+                return dict[key];
         }
     }
 }
